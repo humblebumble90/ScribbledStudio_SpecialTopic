@@ -20,9 +20,19 @@ public class Movement : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
 
         Vector3 direction = new Vector3(horizontal, 0.0f, vertical);
+        Vector3 backwardDir = new Vector3(horizontal, 0.0f, 0.0f);
         //transform.LookAt(direction + transform.position);
-        this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(direction), Time.deltaTime * rotationSpeed);
-        transform.Translate(direction * speed * Time.deltaTime, Space.World);
+        if (vertical >= 0)
+        {
+            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(direction), Time.deltaTime * rotationSpeed);
+            transform.Translate(direction * speed * Time.deltaTime, Space.World);
+        }
+        else
+        {
+            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(backwardDir), Time.deltaTime * rotationSpeed);
+            transform.Translate(direction * speed * Time.deltaTime, Space.World);
+        }
+
 
     }
 }
