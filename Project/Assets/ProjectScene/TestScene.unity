@@ -431,7 +431,7 @@ MonoBehaviour:
   timeTxt: {fileID: 1408278537}
   blueWinTxt: {fileID: 616952201}
   purpleWinTxt: {fileID: 1402783358}
-  drawTxt: {fileID: 0}
+  drawTxt: {fileID: 611509097}
   point: {fileID: 2103287652}
   player: {fileID: 240924385}
   pos: {x: 0, y: 0, z: 0}
