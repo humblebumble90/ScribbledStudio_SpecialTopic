@@ -10,6 +10,8 @@ public class GameController : MonoBehaviour
     public Text bScoreTxt;
     public Text pScoreTxt;
     public GameObject point;
+    public GameObject player;
+    public Vector3 pos;
     private float rot;
     // Start is called before the first frame update
     void Start()
@@ -17,6 +19,8 @@ public class GameController : MonoBehaviour
         bScore = 0;
         pScore = 0;
         rot = 0f;
+
+        pos = player.transform.position;
         //point.transform.localScale = new Vector3(10, 1, 1);
 
     }
@@ -43,6 +47,7 @@ public class GameController : MonoBehaviour
             default:
                 break;
         }
+        player.transform.position = pos;
         //Debug.Log("is scoring working?");
     }
 }
