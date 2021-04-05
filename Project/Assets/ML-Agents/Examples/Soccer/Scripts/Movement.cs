@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    public Rigidbody rb;
     public float speed;
-    public double maxVelocity;
+    public float rotationSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -16,24 +15,14 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (rb.velocity.magnitude >= maxVelocity)
-            return;
 
-        if (Input.GetKey(KeyCode.W))
-        {
-            rb.AddForce(speed * Vector3.forward);
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            rb.AddForce(speed * Vector3.back);
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            rb.AddForce(speed * Vector3.right);
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            rb.AddForce(speed * Vector3.left);
-        }
+        float vertical = Input.GetAxis("Vertical");
+        float horizontal = Input.GetAxis("Horizontal");
+
+        Vector3 direction = new Vector3(horizontal, 0.0f, vertical);
+        //transform.LookAt(direction + transform.position);
+        this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(direction), Time.deltaTime * rotationSpeed);
+        transform.Translate(direction * speed * Time.deltaTime, Space.World);
+
     }
 }
