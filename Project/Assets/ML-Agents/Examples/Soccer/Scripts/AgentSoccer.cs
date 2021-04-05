@@ -233,10 +233,12 @@ public class AgentSoccer : Agent
         agentRb.velocity = Vector3.zero;
         agentRb.angularVelocity = Vector3.zero;
         SetResetParameters();
+        return;
     }
 
     public void SetResetParameters()
     {
         area.ResetBall();
+        return;
     }
 }
