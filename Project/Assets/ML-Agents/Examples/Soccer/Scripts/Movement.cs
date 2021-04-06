@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -33,5 +34,21 @@ public class Movement : MonoBehaviour
         }
 
 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+
+        if(other.gameObject.tag.Equals("ball") && Input.GetKey(KeyCode.Space))
+        {
+            var dif = this.transform.position - other.transform.position;
+            other.gameObject.GetComponent<Rigidbody>().AddForce(dif * 1000f);
+            Debug.Log("ball is thrown");
+        }
+    }
+
+    private float Mathf(float v)
+    {
+        throw new NotImplementedException();
     }
 }
