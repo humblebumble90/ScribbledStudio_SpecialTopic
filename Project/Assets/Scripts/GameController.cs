@@ -64,11 +64,13 @@ public class GameController : MonoBehaviour
             case AgentSoccer.Team.Blue:
                 bScore += 1;
                 Debug.Log("Blue score: " + bScore);
+                SoundManager.PlaySound("score");
                 bScoreTxt.text = "Blue: " + bScore.ToString();
                 break;
             case AgentSoccer.Team.Purple:
                 pScore += 1;
                 Debug.Log("Purple score: " + pScore);
+                SoundManager.PlaySound("score");
                 pScoreTxt.text = "Purple: " + pScore.ToString();
                 break;
             default:
@@ -83,16 +85,19 @@ public class GameController : MonoBehaviour
         Time.timeScale = 0;
         if(pScore == bScore)
         {
+            SoundManager.PlaySound("boo");
             drawTxt.gameObject.SetActive(true);
         }
         else
         {
             if (pScore > bScore)
             {
+                SoundManager.PlaySound("cheer");
                 purpleWinTxt.gameObject.SetActive(true);
             }
             else
             {
+                SoundManager.PlaySound("boo");
                 blueWinTxt.gameObject.SetActive(true);
             }
         }
