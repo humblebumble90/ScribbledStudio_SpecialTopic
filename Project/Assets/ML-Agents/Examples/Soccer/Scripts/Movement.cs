@@ -22,6 +22,7 @@ public class Movement : MonoBehaviour
 
         Vector3 direction = new Vector3(horizontal, 0.0f, vertical);
         //transform.LookAt(direction + transform.position);
+
         if (vertical >= 0)
         {
             this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(direction), Time.deltaTime * rotationSpeed);
