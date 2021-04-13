@@ -614,7 +614,7 @@ GameObject:
   - component: {fileID: 240924386}
   - component: {fileID: 240924389}
   m_Layer: 0
-  m_Name: PlayerStriker
+  m_Name: Player
   m_TagString: purpleAgent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2255,6 +2255,10 @@ PrefabInstance:
     - target: {fileID: 1131626411948014, guid: 54f3340298537426e96a6cc530e2d5d8, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1141134673700168, guid: 54f3340298537426e96a6cc530e2d5d8, type: 3}
+      propertyPath: m_Name
+      value: Hockey Field
       objectReference: {fileID: 0}
     - target: {fileID: 1254803906798222, guid: 54f3340298537426e96a6cc530e2d5d8, type: 3}
       propertyPath: m_IsActive
@@ -5642,7 +5646,7 @@ GameObject:
   - component: {fileID: 1574236051}
   - component: {fileID: 1574236050}
   m_Layer: 0
-  m_Name: SoccerSettings
+  m_Name: Settings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
