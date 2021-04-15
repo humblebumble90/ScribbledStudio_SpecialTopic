@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour
 {
     private int bScore;
@@ -17,6 +18,9 @@ public class GameController : MonoBehaviour
     public Text blueWinTxt;
     public Text purpleWinTxt;
     public Text drawTxt;
+
+    public Button playAgainBtn;
+    public Button mainMenuBtn;
 
     public GameObject point;
     public GameObject player;
@@ -40,6 +44,14 @@ public class GameController : MonoBehaviour
             rot = 0f;
             pos = player.transform.position;
         }
+        bScore = 0;
+        pScore = 0;
+        rot = 0f;
+        playAgainBtn.onClick.AddListener(PlayAgain);
+        mainMenuBtn.onClick.AddListener(MainMenu);
+        pos = player.transform.position;
+        //point.transform.localScale = new Vector3(10, 1, 1);
+        //Time.timeScale = 2;
     }
     private void FixedUpdate()
     {
@@ -92,6 +104,8 @@ public class GameController : MonoBehaviour
         {
             SoundManager.PlaySound("boo");
             drawTxt.gameObject.SetActive(true);
+            playAgainBtn.gameObject.SetActive(true);
+            mainMenuBtn.gameObject.SetActive(true);
         }
         else
         {
@@ -99,11 +113,15 @@ public class GameController : MonoBehaviour
             {
                 SoundManager.PlaySound("cheer");
                 purpleWinTxt.gameObject.SetActive(true);
+                playAgainBtn.gameObject.SetActive(true);
+                mainMenuBtn.gameObject.SetActive(true);
             }
             else
             {
                 SoundManager.PlaySound("boo");
                 blueWinTxt.gameObject.SetActive(true);
+                playAgainBtn.gameObject.SetActive(true);
+                mainMenuBtn.gameObject.SetActive(true);
             }
         }
 
@@ -117,5 +135,15 @@ public class GameController : MonoBehaviour
     {
         Debug.Log("ExitBtn clicekd");
         Application.Quit();
+
+    void PlayAgain()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Debug.Log("geh");
+    }
+
+    void MainMenu()
+    {
+
     }
 }
