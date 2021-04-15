@@ -11,11 +11,15 @@ public class SoundManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("In the soundManager");
         booSound = Resources.Load<AudioClip>("boo");
         cheerSound = Resources.Load<AudioClip>("cheer");
         scoreSound = Resources.Load<AudioClip>("score");
-
         audioSrc = GetComponent<AudioSource>();
+        
+        //audioSrc.clip = booSound;
+        //audioSrc.Play();
+        //audioSrc.PlayOneShot(booSound);
 
     }
 
@@ -30,6 +34,7 @@ public class SoundManager : MonoBehaviour
                 audioSrc.PlayOneShot(cheerSound);
                 break;
             case "score":
+                //Debug.Log("Score sound is playing");
                 audioSrc.PlayOneShot(scoreSound);
                 break;
         }
