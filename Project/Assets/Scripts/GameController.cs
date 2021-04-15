@@ -36,6 +36,7 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1.0f;
         if (SceneManager.GetActiveScene().name == "Main")
         {
             bScore = 0;
@@ -138,7 +139,7 @@ public class GameController : MonoBehaviour
     }
     void PlayAgain()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene("Main");
     }
 
     void MainMenu()

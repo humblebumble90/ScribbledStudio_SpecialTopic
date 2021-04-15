@@ -2793,7 +2793,7 @@ MonoBehaviour:
   point: {fileID: 2103287652}
   player: {fileID: 240924385}
   pos: {x: 0, y: 0, z: 0}
-  timeLimit: 45
+  timeLimit: 30
   timeCounter: 0
   startBtn: {fileID: 0}
   exitBtn: {fileID: 0}
