@@ -32,6 +32,7 @@ public class GameController : MonoBehaviour
     public Button startBtn;
     public Button exitBtn;
     public Button optionBtn;
+    public GameObject panel;
 
     // Start is called before the first frame update
     void Start()
@@ -136,6 +137,18 @@ public class GameController : MonoBehaviour
         Debug.Log("ExitBtn clicekd");
         Application.Quit();
 
+    }
+    public void onInstructionBtn()
+    {
+        Debug.Log("Instruction button clicked");
+        if(!panel.active)
+        {
+            panel.SetActive(true);
+        }
+        else
+        {
+            panel.SetActive(false);
+        }
     }
     void PlayAgain()
     {
