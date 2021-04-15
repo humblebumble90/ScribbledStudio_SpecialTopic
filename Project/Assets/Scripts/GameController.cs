@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.MLAgents;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -28,39 +29,50 @@ public class GameController : MonoBehaviour
 
     public int timeLimit;
     public float timeCounter = 0;
+
+    public Button startBtn;
+    public Button exitBtn;
+    public Button optionBtn;
+
     // Start is called before the first frame update
     void Start()
     {
+        if(SceneManager.GetActiveScene().name == "Main")
+        {
+            bScore = 0;
+            pScore = 0;
+            rot = 0f;
+            pos = player.transform.position;
+        }
         bScore = 0;
         pScore = 0;
         rot = 0f;
-
         playAgainBtn.onClick.AddListener(PlayAgain);
         mainMenuBtn.onClick.AddListener(MainMenu);
         pos = player.transform.position;
         //point.transform.localScale = new Vector3(10, 1, 1);
         //Time.timeScale = 2;
-
     }
     private void FixedUpdate()
     {
-        rot += 0.01f;
-        point.transform.rotation *= Quaternion.Euler(0, rot, 0);
-        timeCounter += Time.fixedDeltaTime;
-
-        if(timeCounter > 1)
+        if(SceneManager.GetActiveScene().name == "Main")
         {
-            timeLimit -= 1;
-            timeTxt.text = "Time : " + timeLimit;
-            timeCounter = 0;
+            rot += 0.01f;
+            point.transform.rotation *= Quaternion.Euler(0, rot, 0);
+            timeCounter += Time.fixedDeltaTime;
+
+            if (timeCounter > 1)
+            {
+                timeLimit -= 1;
+                timeTxt.text = "Time : " + timeLimit;
+                timeCounter = 0;
+            }
+
+            if (timeLimit == 0)
+            {
+                FinishGame();
+            }
         }
-
-        if(timeLimit == 0)
-        {
-            FinishGame();
-        }
-
-
     }
         public void Score(AgentSoccer.Team color)
     {
@@ -69,11 +81,13 @@ public class GameController : MonoBehaviour
             case AgentSoccer.Team.Blue:
                 bScore += 1;
                 Debug.Log("Blue score: " + bScore);
+                SoundManager.PlaySound("score");
                 bScoreTxt.text = "Blue: " + bScore.ToString();
                 break;
             case AgentSoccer.Team.Purple:
                 pScore += 1;
                 Debug.Log("Purple score: " + pScore);
+                SoundManager.PlaySound("score");
                 pScoreTxt.text = "Purple: " + pScore.ToString();
                 break;
             default:
@@ -88,6 +102,7 @@ public class GameController : MonoBehaviour
         Time.timeScale = 0;
         if(pScore == bScore)
         {
+            SoundManager.PlaySound("boo");
             drawTxt.gameObject.SetActive(true);
             playAgainBtn.gameObject.SetActive(true);
             mainMenuBtn.gameObject.SetActive(true);
@@ -96,12 +111,14 @@ public class GameController : MonoBehaviour
         {
             if (pScore > bScore)
             {
+                SoundManager.PlaySound("cheer");
                 purpleWinTxt.gameObject.SetActive(true);
                 playAgainBtn.gameObject.SetActive(true);
                 mainMenuBtn.gameObject.SetActive(true);
             }
             else
             {
+                SoundManager.PlaySound("boo");
                 blueWinTxt.gameObject.SetActive(true);
                 playAgainBtn.gameObject.SetActive(true);
                 mainMenuBtn.gameObject.SetActive(true);
@@ -109,6 +126,15 @@ public class GameController : MonoBehaviour
         }
 
     }
+    public void onClickStartBtn()
+    {
+        Debug.Log("StartBtn clicekd");
+        SceneManager.LoadScene("Main");
+    }
+    public void onExitBtn()
+    {
+        Debug.Log("ExitBtn clicekd");
+        Application.Quit();
 
     void PlayAgain()
     {
