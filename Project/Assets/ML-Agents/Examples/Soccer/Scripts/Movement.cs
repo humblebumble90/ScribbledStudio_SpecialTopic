@@ -23,27 +23,31 @@ public class Movement : MonoBehaviour
         Vector3 direction = new Vector3(horizontal, 0.0f, vertical);
         //transform.LookAt(direction + transform.position);
 
-        if (vertical >= 0)
+        if (direction != Vector3.zero)
         {
-            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(direction), Time.deltaTime * rotationSpeed);
-            transform.Translate(direction * speed * Time.deltaTime, Space.World);
-        }
-        else
-        {
-            this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(new Vector3(horizontal, 0.0f, 0.0f)), Time.deltaTime * rotationSpeed);
-            transform.Translate(direction * speed * Time.deltaTime, Space.World);
+            if (vertical >= 0)
+            {
+                this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(direction), Time.deltaTime * rotationSpeed);
+                transform.Translate(direction * speed * Time.deltaTime, Space.World);
+            }
+            else
+            {
+                this.transform.rotation = Quaternion.Slerp(this.transform.rotation, Quaternion.LookRotation(new Vector3(horizontal, 0.0f, 0.0f)), Time.deltaTime * rotationSpeed);
+                transform.Translate(direction * speed * Time.deltaTime, Space.World);
+            }
         }
 
 
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionStay(Collision other)
     {
 
         if(other.gameObject.tag.Equals("ball") && Input.GetKey(KeyCode.Space))
         {
             var dif = this.transform.position - other.transform.position;
-            other.gameObject.GetComponent<Rigidbody>().AddForce(dif * 1000f);
+            //other.gameObject.GetComponent<Rigidbody>().AddForce(dif * 1000f);
+            other.gameObject.GetComponent<Rigidbody>().AddForce(this.transform.forward * 1000f);
             Debug.Log("ball is thrown");
         }
     }
