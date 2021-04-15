@@ -6,11 +6,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour
 {
-    private int bScore;
-    private int pScore;
+    public int bScore;
+    public int pScore;
 
     public Text bScoreTxt;
     public Text pScoreTxt;
@@ -37,7 +36,7 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(SceneManager.GetActiveScene().name == "Main")
+        if (SceneManager.GetActiveScene().name == "Main")
         {
             bScore = 0;
             pScore = 0;
@@ -55,7 +54,7 @@ public class GameController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if(SceneManager.GetActiveScene().name == "Main")
+        if (SceneManager.GetActiveScene().name == "Main")
         {
             rot += 0.01f;
             point.transform.rotation *= Quaternion.Euler(0, rot, 0);
@@ -74,9 +73,9 @@ public class GameController : MonoBehaviour
             }
         }
     }
-        public void Score(AgentSoccer.Team color)
+    public void Score(AgentSoccer.Team color)
     {
-        switch(color)
+        switch (color)
         {
             case AgentSoccer.Team.Blue:
                 bScore += 1;
@@ -100,7 +99,7 @@ public class GameController : MonoBehaviour
     private void FinishGame()
     {
         Time.timeScale = 0;
-        if(pScore == bScore)
+        if (pScore == bScore)
         {
             SoundManager.PlaySound("boo");
             drawTxt.gameObject.SetActive(true);
@@ -136,14 +135,14 @@ public class GameController : MonoBehaviour
         Debug.Log("ExitBtn clicekd");
         Application.Quit();
 
+    }
     void PlayAgain()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        Debug.Log("geh");
     }
 
     void MainMenu()
     {
-
+        SceneManager.LoadScene("StartScene");
     }
 }
