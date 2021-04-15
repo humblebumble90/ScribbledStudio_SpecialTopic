@@ -21,6 +21,10 @@ public class GameController : MonoBehaviour
     public Button playAgainBtn;
     public Button mainMenuBtn;
 
+    public Button easyBtn;
+    public Button mediumBtn;
+    public Button hardBtn;
+
     public GameObject point;
     public GameObject player;
     public Vector3 pos;
@@ -34,9 +38,46 @@ public class GameController : MonoBehaviour
     public Button optionBtn;
     public GameObject panel;
 
+    public AudioSource boo;
+    public AudioSource cheer;
+    public AudioSource scoring;
+
+    public string Challenge;
+    public GameObject goalie;
+    public GameObject left;
+
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("start");
+        goalie = GameObject.Find("PurpleStriker (4)");
+        left = GameObject.Find("PurpleStriker (1)");
+        Challenge = PlayerPrefs.GetString("Player");
+        if (Challenge == "1")
+        {
+            goalie = GameObject.Find("PurpleStriker (4)");
+            left = GameObject.Find("PurpleStriker (1)");
+            goalie.SetActive(true);
+            left.SetActive(true);
+            Debug.Log("updaye");
+        }
+        if (Challenge == "2")
+        {
+            goalie = GameObject.Find("PurpleStriker (4)");
+            left = GameObject.Find("PurpleStriker (1)");
+            goalie.SetActive(false);
+            left.SetActive(true);
+            Debug.Log("updaye");
+        }
+        if (Challenge == "3")
+        {
+            goalie = GameObject.Find("PurpleStriker (4)");
+            left = GameObject.Find("PurpleStriker (1)");
+            goalie.SetActive(false);
+            left.SetActive(false);
+            Debug.Log("hea");
+            Debug.Log("updaye");
+        }
         Time.timeScale = 1.0f;
         if (SceneManager.GetActiveScene().name == "Main")
         {
@@ -56,6 +97,7 @@ public class GameController : MonoBehaviour
     }
     private void FixedUpdate()
     {
+
         if (SceneManager.GetActiveScene().name == "Main")
         {
             rot += 0.01f;
@@ -82,13 +124,15 @@ public class GameController : MonoBehaviour
             case AgentSoccer.Team.Blue:
                 bScore += 1;
                 Debug.Log("Blue score: " + bScore);
-                SoundManager.PlaySound("score");
+                scoring.Play();
+                //SoundManager.PlaySound("score");
                 bScoreTxt.text = "Blue: " + bScore.ToString();
                 break;
             case AgentSoccer.Team.Purple:
                 pScore += 1;
                 Debug.Log("Purple score: " + pScore);
-                SoundManager.PlaySound("score");
+                scoring.Play();
+                //SoundManager.PlaySound("score");
                 pScoreTxt.text = "Purple: " + pScore.ToString();
                 break;
             default:
@@ -103,7 +147,8 @@ public class GameController : MonoBehaviour
         Time.timeScale = 0;
         if (pScore == bScore)
         {
-            SoundManager.PlaySound("boo");
+            boo.Play();
+            //SoundManager.PlaySound("boo");
             drawTxt.gameObject.SetActive(true);
             playAgainBtn.gameObject.SetActive(true);
             mainMenuBtn.gameObject.SetActive(true);
@@ -112,14 +157,16 @@ public class GameController : MonoBehaviour
         {
             if (pScore > bScore)
             {
-                SoundManager.PlaySound("cheer");
+                cheer.Play();
+                //SoundManager.PlaySound("cheer");
                 purpleWinTxt.gameObject.SetActive(true);
                 playAgainBtn.gameObject.SetActive(true);
                 mainMenuBtn.gameObject.SetActive(true);
             }
             else
             {
-                SoundManager.PlaySound("boo");
+                boo.Play();
+                //SoundManager.PlaySound("boo");
                 blueWinTxt.gameObject.SetActive(true);
                 playAgainBtn.gameObject.SetActive(true);
                 mainMenuBtn.gameObject.SetActive(true);
@@ -150,13 +197,17 @@ public class GameController : MonoBehaviour
             panel.SetActive(false);
         }
     }
-    void PlayAgain()
+    public void PlayAgain()
     {
         SceneManager.LoadScene("Main");
     }
 
-    void MainMenu()
+    public void MainMenu()
     {
         SceneManager.LoadScene("StartScene");
+    }
+    public void onClickOptionBtn()
+    {
+        SceneManager.LoadScene("OptionScene");
     }
 }
