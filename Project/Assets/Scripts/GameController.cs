@@ -6,11 +6,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour
 {
-    private int bScore;
-    private int pScore;
+    public int bScore;
+    public int pScore;
 
     public Text bScoreTxt;
     public Text pScoreTxt;
@@ -136,15 +135,14 @@ public class GameController : MonoBehaviour
         Debug.Log("ExitBtn clicekd");
         Application.Quit();
 
-        void PlayAgain()
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-            Debug.Log("geh");
-        }
+    }
+    void PlayAgain()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 
-        void MainMenu()
-        {
-
-        }
+    void MainMenu()
+    {
+        SceneManager.LoadScene("StartScene");
     }
 }
